@@ -681,8 +681,23 @@ async function submitForm() {
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
 
-    const date1 = formatDateTime(document.getElementById('date1').value);
-    const date2 = formatDateTime(document.getElementById('date2').value);
+    // ★ 第一・第二希望日時の未選択チェック
+    const rawDate1 = document.getElementById('date1').value;
+    const rawDate2 = document.getElementById('date2').value;
+
+    if (!rawDate1) {
+        alert('第一希望日時を選択してください。');
+        document.getElementById('kibou1').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+    if (!rawDate2) {
+        alert('第二希望日時を選択してください。');
+        document.getElementById('kibou2').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+
+    const date1 = formatDateTime(rawDate1);
+    const date2 = formatDateTime(rawDate2);
 
     // ★ 第三希望は「生の値」を先に取る
     const rawDate3 = document.getElementById('date3').value;
@@ -722,5 +737,4 @@ async function submitForm() {
     </script>
 </body>
 </html>
-
 
